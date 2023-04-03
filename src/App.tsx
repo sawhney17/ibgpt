@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { MantineProvider } from "@mantine/core";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import ChatbotSelector from "./pages/ChatbotSelector";
+import ChatUI from "./pages/ChatUI";
+import { Notifications } from "@mantine/notifications";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <MantineProvider withGlobalStyles withNormalizeCSS
+    theme={{
+      colors: {
+        'ocean-blue': ['#7AD1DD', '#5FCCDB', '#44CADC', '#2AC9DE', '#1AC2D9', '#11B7CD', '#09ADC3', '#0E99AC', '#128797', '#147885'],
+      },
+      primaryColor: 'ocean-blue',
+    }}
+    >
+      {/* <Notifications> */}
+        <BrowserRouter
+        // Type '{ children: Element; }' is missing the following properties from type 'RouterProps': location, navigatorts(2739)
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Routes>
+            <Route path="/" element={<ChatbotSelector></ChatbotSelector>} />
+            <Route path="/chatui" element={<ChatUI></ChatUI>} />
+          </Routes>
+        </BrowserRouter>
+      {/* </Notifications> */}
+      {/* </NavbarNested> */}
+    </MantineProvider>
   );
 }
 
