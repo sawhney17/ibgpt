@@ -15,6 +15,7 @@ import { IconChevronDown } from "@tabler/icons-react";
 import { auth, signInWithGoogle } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HEADER_HEIGHT = rem(60);
 
@@ -76,12 +77,13 @@ function HeaderAction({ links }: HeaderActionProps) {
   const { classes } = useStyles();
   const [opened, { toggle }] = useDisclosure(false);
   const [loggedIn, setloggedIn] = useState(false);
+  const navigate = useNavigate();
 
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       setloggedIn(true);
       // @ts-expect-error
-      setProfileLink(user.reloadUserInfo.providerUserInfo[0].photoUrl)
+      setProfileLink(user.reloadUserInfo.providerUserInfo[0].photoUrl);
     } else {
       setloggedIn(false);
     }
@@ -104,7 +106,10 @@ function HeaderAction({ links }: HeaderActionProps) {
             <a
               href={link.link}
               className={classes.link}
-              // onClick={(event) => event.preventDefault()}
+              onClick={(event) => {
+                navigate(link.link);
+                event.preventDefault();
+              }}
             >
               <Center>
                 <span className={classes.linkLabel}>{link.label}</span>
@@ -122,7 +127,10 @@ function HeaderAction({ links }: HeaderActionProps) {
         key={link.label}
         href={link.link}
         className={classes.link}
-        // onClick={(event) => event.preventDefault()}
+        onClick={(event) => {
+          event.preventDefault();
+          navigate(link.link);
+        }}
       >
         {link.label}
       </a>
@@ -163,6 +171,7 @@ function HeaderAction({ links }: HeaderActionProps) {
             alt="Profile"
             style={{ height: "3rem", borderRadius: "100px" }}
           />
+        ) : (
           // <Button
           //   radius="xl"
           //   h={30}
@@ -172,7 +181,6 @@ function HeaderAction({ links }: HeaderActionProps) {
           // >
           //   Profile
           // </Button>
-        ) : (
           <Button
             radius="xl"
             h={30}
