@@ -125,6 +125,8 @@ export default function ChatUI() {
     // Use fetch instead of axios
 
     // uc.a.run.app/' from origin 'http://localhost:50767' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+    const emailAdd = auth.currentUser?.email;
+    // uc.a.run.app/' from origin 'http://localhost:50767' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
     const searchResponse = await fetch(
       "https://botgptserver-2pzthp6v5a-uc.a.run.app",
       {
@@ -135,6 +137,7 @@ export default function ChatUI() {
         body: JSON.stringify({
           messages: followUpQuestion,
           book: chatbotName+".json",
+          email: emailAdd,
         }),
       }
     );
