@@ -211,7 +211,7 @@ export default function ChatUI() {
                         {chat.content.match(/(SEARCH:.*?STOP)/g) ? (
                           <div className="p-2 m-1 font-bold italic">
                             Searching textbook for{" "}
-                            {chat.content.match(/SEARCH:(.*)(?=STOP)/g)}...
+                            {chat.content.match(/SEARCH:(.*)(?=STOP)/g)?.[0].replace("SEARCH:", "")}
                           </div>
                         ) : (
                           <div
