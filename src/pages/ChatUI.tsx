@@ -219,7 +219,11 @@ export default function ChatUI() {
             type="text"
             className="border border-gray-300 rounded-lg p-2 flex-1"
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={
+              (e) => {
+                if (allowResponse) {
+                  setMessage(e.target.value);
+                }}}
           />
           <button
             type="submit"

@@ -1,5 +1,4 @@
 // Import react
-import React from "react";
 import { BadgeCard } from "./components/GridCard";
 import { Grid } from "@mantine/core";
 import { HeaderAction } from "./components/HeaderAction";

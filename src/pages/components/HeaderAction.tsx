@@ -10,7 +10,6 @@ import {
   rem,
   Text,
 } from "@mantine/core";
-import { MantineLogo } from "@mantine/ds";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
 import { auth, signInWithGoogle } from "../../firebase";
