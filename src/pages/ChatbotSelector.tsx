@@ -18,10 +18,10 @@ export const links = [
     link: "https://aryansawhney.com",
     label: "About",
   },
-  // {
-  //   link: "/pricing",
-  //   label: "Pricing",
-  // },
+  {
+    link: "/",
+    label: "Home",
+  },
   {
     // Mailto url
     link: "mailto:240aryans@gmail.com",
