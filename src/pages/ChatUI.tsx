@@ -76,7 +76,7 @@ export default function ChatUI() {
     //   },
     // ]);
     // if the completion starts with search and ends in STOP, strip everything that isn't between that
-    // if (completion.startsWith("SEARCH:")) {
+    // if (completion.match(/(SEARCH:.*?STOP)/g)) {
     //   const followUpQuestion = completion
     //     .replace("SEARCH:", "")
     //     .replace("STOP", "")
@@ -86,7 +86,7 @@ export default function ChatUI() {
     // If completion contains SEARCH: and STOP, then get the text between them inclusive
     const followUpQuestion = completion.match(/(SEARCH:.*?STOP)/g);
     // Else just set it to the completion
-    if (completion.startsWith("SEARCH:")) {
+    if (completion.match(/(SEARCH:.*?STOP)/g)) {
       chats2.push({
         role: "assistant",
         content: followUpQuestion?.[0],
@@ -99,7 +99,7 @@ export default function ChatUI() {
     }
 
     // Check if the model has a search engine prompt
-    if (completion.startsWith("SEARCH:")) {
+    if (completion.match(/(SEARCH:.*?STOP)/g)) {
       handleFollowUp(completion, chats2);
     } else {
       // Ask a follow up question
@@ -154,7 +154,7 @@ export default function ChatUI() {
       content: completion,
     });
 
-    if (completion.startsWith("SEARCH:")) {
+    if (completion.match(/(SEARCH:.*?STOP)/g)) {
       handleFollowUp(completion, chats2);
     } else {
       setChats(chats2);
@@ -198,7 +198,7 @@ export default function ChatUI() {
                   }`}
                 >
                    {/* Conditionally render chat content or a custom message */}
-            {chat.content.startsWith("SEARCH:") ? (
+            {chat.content.match(/(SEARCH:.*?STOP)/g) ? (
               <div className="p-2 m-1 font-bold italic">Searching textbook for {chat.content.match(/(?<=SEARCH:)(.*)(?=STOP)/g)}...</div>
             ) : <div
                   // Set max width to 80% of the screen
