@@ -250,6 +250,14 @@ export default function ChatUI() {
                 <Button
                   type="button"
                   className=" text-white font-bold py-2 px-4 rounded-lg"
+                  disabled={!allowResponse}
+                  onClick={(e) => {
+                    // Reset everything and stop getting responses
+                    // Send a notification to the user that the chat has been reset
+                    setAllowResponse(true);
+                    setMessage("");
+                    setChats([]);
+                  }}
                 >
                   <IconRefreshDot></IconRefreshDot>
                 </Button>
