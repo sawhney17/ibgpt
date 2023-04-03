@@ -136,7 +136,7 @@ export default function ChatUI() {
         },
         body: JSON.stringify({
           messages: followUpQuestion,
-          book: chatbotName+".json",
+          book: chatbotName + ".json",
           email: emailAdd,
         }),
       }
@@ -214,7 +214,9 @@ export default function ChatUI() {
                         {chat.content.match(/(SEARCH:.*?STOP)/g) ? (
                           <div className="p-2 m-1 font-bold italic">
                             Searching textbook for{" "}
-                            {chat.content.match(/SEARCH:(.*)(?=STOP)/g)?.[0].replace("SEARCH:", "")}
+                            {chat.content
+                              .match(/SEARCH:(.*)(?=STOP)/g)?.[0]
+                              .replace("SEARCH:", "")}
                           </div>
                         ) : (
                           <div
@@ -256,7 +258,14 @@ export default function ChatUI() {
                     // Send a notification to the user that the chat has been reset
                     setAllowResponse(true);
                     setMessage("");
-                    setChats([]);
+                    setChats([
+                      {
+                        role: "system",
+                        content:
+                          'You are a helpful assistant called Llama that has access to a search engine. Your knowledge is strictly restricted to a search engine which you can call through "SEARCH: <prompt>" STOP.\n\nFor example: \n\nUser: What is the definition of demand?\nBill: SEARCH: "definition demand" STOP\nEngine: the quantity of a good or service consumers are willing and able to purchase at a particular price and time.\nBill: demand refers to the quantity of a good or service that consumers are willing and able to purchase at a particular price and time. \n\nDo NOT use your prior knowledge at all, only use the search engine!\nYou may search again and ask follow up questions if the answer is not ideal!\n\nStop writing when you say STOP!\nDo NOT assume the role of Engine!\n Don\' say stuff like "According to the search engine,"',
+                      },
+                      
+                    ]);
                   }}
                 >
                   <IconRefreshDot></IconRefreshDot>
