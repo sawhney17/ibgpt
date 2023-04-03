@@ -14,7 +14,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
 import { auth, signInWithGoogle } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const HEADER_HEIGHT = rem(60);
 
@@ -72,7 +72,7 @@ interface HeaderActionProps {
   }[];
 }
 
-export function HeaderAction({ links }: HeaderActionProps) {
+function HeaderAction({ links }: HeaderActionProps) {
   const { classes } = useStyles();
   const [opened, { toggle }] = useDisclosure(false);
   const [loggedIn, setloggedIn] = useState(false);
@@ -173,3 +173,5 @@ export function HeaderAction({ links }: HeaderActionProps) {
     </Header>
   );
 }
+
+export default React.memo(HeaderAction);

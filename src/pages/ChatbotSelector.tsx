@@ -1,10 +1,10 @@
 // Import react
 import { BadgeCard } from "./components/GridCard";
 import { Grid } from "@mantine/core";
-import { HeaderAction } from "./components/HeaderAction";
+import HeaderAction from "./components/HeaderAction";
 
 // Initialize the component
-const links = [
+export const links = [
   // {
   //   link: "/about",
   //   label: "Features",

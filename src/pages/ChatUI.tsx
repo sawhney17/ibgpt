@@ -8,6 +8,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { notifications } from "@mantine/notifications";
 import { Button, Loader } from "@mantine/core";
 import { IconBrush, IconRefreshDot } from "@tabler/icons-react";
+import HeaderAction from "./components/HeaderAction";
+import { links } from "./ChatbotSelector";
 
 export default function ChatUI() {
   // Get the chatbot name from the URL
@@ -35,21 +37,18 @@ export default function ChatUI() {
 
   // If not logged in, redirect to login page
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) {
-        navigate("/")
-        notifications.show(
-          {
-            title: "Oops, you are not logged in!",
-            message: "Please log in to continue",
-            color: "red",
-          },
-        )
-      }
-      else {
-        setLoggedIn(true)
+        navigate("/");
+        notifications.show({
+          title: "Oops, you are not logged in!",
+          message: "Please log in to continue",
+          color: "red",
+        });
+      } else {
+        setLoggedIn(true);
       }
     });
   }, []);
@@ -168,109 +167,123 @@ export default function ChatUI() {
   // Use tailwind
 
   return (
+    <div className="h-screen flex flex-col">
+      <HeaderAction links={links}></HeaderAction>
+      {/* Don't rerender headeraction */}
 
-    <div className="flex flex-col h-screen">
-      {loggedIn && (
-        <>
-      <div className="flex-1 overflow-y-scroll">
-        {/* Have a default .chat message. Wiht the text "Ask any questions you have!" */}
-        <div
-          // key={chat.id}
-          className={`flex ${"justify-start"}`}
-        >
-          <div className={`flex flex-col ${"items-start"}`}>
-            <div className={`${"bg-blue-300"} rounded-lg p-2 m-1`}>
-              Hello, how can I help you?
-            </div>
-          </div>
-        </div>
-        {chats.map(
-          (chat) =>
-            chat.role !== "system" &&
-            !chat.content.startsWith("Engine:") && (
+      {/* make this fit up the entire screen minus the height of top bar and the bottom search bar */}
+      <div className="flex-1 flex flex-col overflow-y-scroll">
+        {loggedIn && (
+          <>
+            <div className="flex-1 overflow-y-scroll">
+              {/* Have a default .chat message. Wiht the text "Ask any questions you have!" */}
               <div
                 // key={chat.id}
-                className={`flex ${
-                  chat.role === "assistant" ? "justify-start" : "justify-end"
-                }`}
+                className={`flex ${"justify-start"}`}
               >
-                <div
-                  className={`flex flex-col ${
-                    chat.role === "assistant" ? "items-start" : "items-end"
-                  }`}
-                >
-                   {/* Conditionally render chat content or a custom message */}
-            {chat.content.match(/(SEARCH:.*?STOP)/g) ? (
-              <div className="p-2 m-1 font-bold italic">Searching textbook for {chat.content.match(/(?<=SEARCH:)(.*)(?=STOP)/g)}...</div>
-            ) : <div
-                  // Set max width to 80% of the screen
-                    className={`${
-                      chat.role === "assistant" ? "bg-blue-300" : "bg-green-300"
-                    } rounded-lg p-2 m-1 max-w-[80%]`}
-                  >
-                    {chat.content}
-                  </div>}
+                <div className={`flex flex-col ${"items-start"}`}>
+                  <div className={`${"bg-blue-300"} rounded-lg p-2 m-1`}>
+                    Hello, how can I help you?
+                  </div>
                 </div>
               </div>
-            )
+              {chats.map(
+                (chat) =>
+                  chat.role !== "system" &&
+                  !chat.content.startsWith("Engine:") && (
+                    <div
+                      // key={chat.id}
+                      className={`flex ${
+                        chat.role === "assistant"
+                          ? "justify-start"
+                          : "justify-end"
+                      }`}
+                    >
+                      <div
+                        className={`flex flex-col ${
+                          chat.role === "assistant"
+                            ? "items-start"
+                            : "items-end"
+                        }`}
+                      >
+                        {/* Conditionally render chat content or a custom message */}
+                        {chat.content.match(/(SEARCH:.*?STOP)/g) ? (
+                          <div className="p-2 m-1 font-bold italic">
+                            Searching textbook for{" "}
+                            {chat.content.match(/SEARCH:(.*)(?=STOP)/g)}...
+                          </div>
+                        ) : (
+                          <div
+                            // Set max width to 80% of the screen
+                            className={`${
+                              chat.role === "assistant"
+                                ? "bg-blue-300"
+                                : "bg-green-300"
+                            } rounded-lg p-2 m-1 max-w-[80%]`}
+                          >
+                            {chat.content}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )
+              )}
+              {/* if !allowResponse, show <Loader variant="dots"/> in a blue box */}
+              {!allowResponse && (
+                <div className="flex justify-center">
+                  <div className="flex flex-col items-center">
+                    {/* set to alice blue*/}
+                    <div className="rounded-lg p-2 m-1 bg-teal-100">
+                      <Loader variant="dots" />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="flex flex-col justify-end">
+              <form className="flex p-2  gap-2">
+                {/* Brush icon in a cirlce*/}
+                <Button
+                  type="button"
+                  className=" text-white font-bold py-2 px-4 rounded-lg"
+                >
+                  <IconRefreshDot></IconRefreshDot>
+                </Button>
+                <input
+                  type="text"
+                  className="border border-gray-300 rounded-lg p-2 flex-1"
+                  value={message}
+                  // Make it unable to be edited
+                  disabled={!allowResponse}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                />
+                <Button
+                  type="submit"
+                  className="text-white font-bold py-2 px-4 rounded-lg"
+                  onClick={(e) => {
+                    setAllowResponse(false);
+                    setMessage("");
+                    getResponse([...chats, { content: message, role: "user" }]);
+                    // sendOpenAIRequest(chats);
+                    e.preventDefault();
+                    setChats([
+                      ...chats,
+                      {
+                        content: message,
+                        role: "user",
+                      },
+                    ]);
+                  }}
+                >
+                  Send
+                </Button>
+              </form>
+            </div>
+          </>
         )}
-        {/* if !allowResponse, show <Loader variant="dots"/> in a blue box */}
-        {!allowResponse && (
-          <div className="flex justify-center">
-            <div className="flex flex-col items-center">
-            {/* set to alice blue*/}
-              <div className="rounded-lg p-2 m-1 bg-teal-100">
-                <Loader variant="dots" />
-                </div>
-                </div>
-                </div>
-                )}
-
       </div>
-      <div className="flex flex-col justify-end">
-        <form className="flex p-2  gap-2">
-          {/* Brush icon in a cirlce*/}
-          <Button
-            type="button"
-            className=" text-white font-bold py-2 px-4 rounded-lg"
-            >
-              <IconRefreshDot></IconRefreshDot>
-            </Button>
-          <input
-            type="text"
-            className="border border-gray-300 rounded-lg p-2 flex-1"
-            value={message}
-            // Make it unable to be edited
-            disabled={!allowResponse}
-            onChange={
-              (e) => {
-                  setMessage(e.target.value);
-                }}
-          />
-          <Button
-            type="submit"
-            className="text-white font-bold py-2 px-4 rounded-lg"
-            onClick={(e) => {
-              setAllowResponse(false);
-              setMessage("");
-              getResponse([...chats, { content: message, role: "user" }]);
-              // sendOpenAIRequest(chats);
-              e.preventDefault();
-              setChats([
-                ...chats,
-                {
-                  content: message,
-                  role: "user",
-                },
-              ]);
-            }}
-          >
-            Send
-          </Button>
-        </form>
-      </div>
-      </>
-      )}
     </div>
   );
 }
