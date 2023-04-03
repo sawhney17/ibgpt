@@ -1,6 +1,6 @@
 import "./App.css";
 import { MantineProvider } from "@mantine/core";
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Router, Routes } from "react-router-dom";
 import ChatbotSelector from "./pages/ChatbotSelector";
 import ChatUI from "./pages/ChatUI";
 import About from "./pages/About";
@@ -16,7 +16,7 @@ function App() {
     }}
     > 
       {/* <Notifications> */}
-        <BrowserRouter
+        <HashRouter
         // Type '{ children: Element; }' is missing the following properties from type 'RouterProps': location, navigatorts(2739)
         >
           <Routes>
@@ -24,7 +24,7 @@ function App() {
             <Route path="/chatui" element={<ChatUI></ChatUI>} />
             <Route path="/about" element={<About></About>} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       {/* </Notifications> */}
       {/* </NavbarNested> */}
     </MantineProvider>

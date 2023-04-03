@@ -74,7 +74,7 @@ export function HeroContentLeft() {
         zIndex={0}
       />
       <Container className={classes.container}>
-        <Title className={classes.title}>The IB resource you always wanted :)</Title>
+        <Title className={classes.title}>The IB resource you always wanted</Title>
         <Text className={classes.description} size="xl" mt="xl">
             IBGPT is a free online tool that provides powerful chatbots to help you with your IB subjects.
         </Text>
