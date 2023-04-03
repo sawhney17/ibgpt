@@ -3,6 +3,7 @@ import { MantineProvider } from "@mantine/core";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import ChatbotSelector from "./pages/ChatbotSelector";
 import ChatUI from "./pages/ChatUI";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Routes>
             <Route path="/" element={<ChatbotSelector></ChatbotSelector>} />
             <Route path="/chatui" element={<ChatUI></ChatUI>} />
+            <Route path="/about" element={<About></About>} />
           </Routes>
         </BrowserRouter>
       {/* </Notifications> */}

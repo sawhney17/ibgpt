@@ -15,7 +15,7 @@ export const links = [
   //   links: [],
   // },
   {
-    link: "https://aryansawhney.com",
+    link: "/about",
     label: "About",
   },
   {
@@ -24,7 +24,7 @@ export const links = [
   },
   {
     // Mailto url
-    link: "mailto:240aryans@gmail.com",
+    link: "mailto:sawhney@aryansawhney.com",
     label: "Support",
   },
 ];

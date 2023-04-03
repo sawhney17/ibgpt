@@ -77,13 +77,16 @@ function HeaderAction({ links }: HeaderActionProps) {
   const [opened, { toggle }] = useDisclosure(false);
   const [loggedIn, setloggedIn] = useState(false);
 
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
       setloggedIn(true);
+      // @ts-expect-error
+      setProfileLink(user.reloadUserInfo.providerUserInfo[0].photoUrl)
     } else {
       setloggedIn(false);
     }
   });
+  const [profileLink, setProfileLink] = useState("");
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
       <Menu.Item key={item.link}>{item.label}</Menu.Item>
@@ -155,21 +158,20 @@ function HeaderAction({ links }: HeaderActionProps) {
         </Group>
 
         {loggedIn ? (
-          // <img
-          //   //   @ts-ignore
-          //   src={auth.currentUser.photoURL}
-          //   alt="Profile"
-          //   style={{ height: "3rem", borderRadius: "100px" }}
-          // />
-          <Button
-            radius="xl"
-            h={30}
-            // onClick={() => {
-            //   signInWithGoogle();
-            // }}
-          >
-            Profile
-          </Button>
+          <img
+            src={profileLink}
+            alt="Profile"
+            style={{ height: "3rem", borderRadius: "100px" }}
+          />
+          // <Button
+          //   radius="xl"
+          //   h={30}
+          //   // onClick={() => {
+          //   //   signInWithGoogle();
+          //   // }}
+          // >
+          //   Profile
+          // </Button>
         ) : (
           <Button
             radius="xl"
