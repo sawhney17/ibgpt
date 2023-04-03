@@ -79,7 +79,7 @@ export function HeroContentLeft() {
             IBGPT is a free online tool that provides powerful chatbots to help you with your IB subjects.
         </Text>
 
-        <Button variant="gradient" size="xl" radius="xl" className={classes.control} onClick={()=>{navigate("/")}}>
+        <Button variant="gradient" size="xl" radius="xl" className={classes.control} onClick={()=>{navigate("/chats")}}>
           Chat Now
         </Button>
       </Container>

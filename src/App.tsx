@@ -20,9 +20,9 @@ function App() {
         // Type '{ children: Element; }' is missing the following properties from type 'RouterProps': location, navigatorts(2739)
         >
           <Routes>
-            <Route path="/" element={<ChatbotSelector></ChatbotSelector>} />
+            <Route path="/chats" element={<ChatbotSelector></ChatbotSelector>} />
             <Route path="/chatui" element={<ChatUI></ChatUI>} />
-            <Route path="/about" element={<About></About>} />
+            <Route path="/" element={<About></About>} />
           </Routes>
         </HashRouter>
       {/* </Notifications> */}

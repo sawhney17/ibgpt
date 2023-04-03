@@ -15,18 +15,19 @@ export const links = [
   //   links: [],
   // },
   {
-    link: "/about",
-    label: "About",
-  },
-  {
     link: "/",
     label: "Home",
   },
   {
-    // Mailto url
-    link: "mailto:sawhney@aryansawhney.com",
-    label: "Support",
+    link: "/chats",
+    label: "Chats",
   },
+  
+  // {
+  //   // Mailto url
+  //   link: "mailto:sawhney@aryansawhney.com",
+  //   label: "Support",
+  // },
 ];
 export default function ChatbotSelector() {
   return (
