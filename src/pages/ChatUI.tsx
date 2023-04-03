@@ -6,6 +6,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { auth, sendOpenAIRequest } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { notifications } from "@mantine/notifications";
+import { Button, Loader } from "@mantine/core";
+import { IconBrush, IconRefreshDot } from "@tabler/icons-react";
 
 export default function ChatUI() {
   // Get the chatbot name from the URL
@@ -212,23 +214,44 @@ export default function ChatUI() {
               </div>
             )
         )}
+        {/* if !allowResponse, show <Loader variant="dots"/> in a blue box */}
+        {!allowResponse && (
+          <div className="flex justify-center">
+            <div className="flex flex-col items-center">
+            {/* set to alice blue*/}
+              <div className="rounded-lg p-2 m-1 bg-teal-100">
+                <Loader variant="dots" />
+                </div>
+                </div>
+                </div>
+                )}
+
       </div>
       <div className="flex flex-col justify-end">
-        <form className="flex p-2">
+        <form className="flex p-2  gap-2">
+          {/* Brush icon in a cirlce*/}
+          <Button
+            type="button"
+            className=" text-white font-bold py-2 px-4 rounded-lg"
+            >
+              <IconRefreshDot></IconRefreshDot>
+            </Button>
           <input
             type="text"
             className="border border-gray-300 rounded-lg p-2 flex-1"
             value={message}
+            // Make it unable to be edited
+            disabled={!allowResponse}
             onChange={
               (e) => {
-                if (allowResponse) {
                   setMessage(e.target.value);
-                }}}
+                }}
           />
-          <button
+          <Button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+            className="text-white font-bold py-2 px-4 rounded-lg"
             onClick={(e) => {
+              setAllowResponse(false);
               setMessage("");
               getResponse([...chats, { content: message, role: "user" }]);
               // sendOpenAIRequest(chats);
@@ -243,7 +266,7 @@ export default function ChatUI() {
             }}
           >
             Send
-          </button>
+          </Button>
         </form>
       </div>
       </>
