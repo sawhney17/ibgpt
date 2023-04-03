@@ -5,25 +5,26 @@ import { HeaderAction } from "./components/HeaderAction";
 
 // Initialize the component
 const links = [
+  // {
+  //   link: "/about",
+  //   label: "Features",
+  // },
+  // {
+  //   link: "#1",
+  //   label: "Learn",
+  //   links: [],
+  // },
   {
-    link: "/about",
-    label: "Features",
-  },
-  {
-    link: "#1",
-    label: "Learn",
-    links: [],
-  },
-  {
-    link: "/about",
+    link: "https://aryansawhney.com",
     label: "About",
   },
+  // {
+  //   link: "/pricing",
+  //   label: "Pricing",
+  // },
   {
-    link: "/pricing",
-    label: "Pricing",
-  },
-  {
-    link: "#2",
+    // Mailto url
+    link: "mailto:240aryans@gmail.com",
     label: "Support",
   },
 ];
