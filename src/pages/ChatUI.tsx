@@ -13,9 +13,9 @@ import { links } from "./ChatbotSelector";
 
 export default function ChatUI() {
   // Get the chatbot name from the URL
-  // const location = useLocation();
-  // const searchParams = new URLSearchParams(location.search);
-  // const chatbotName = searchParams.get("chatbot");
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const chatbotName = searchParams.get("chatbot");
 
   // Chats array
   const [chats, setChats] = React.useState([
@@ -134,6 +134,7 @@ export default function ChatUI() {
         },
         body: JSON.stringify({
           messages: followUpQuestion,
+          book: chatbotName+".json",
         }),
       }
     );

@@ -42,8 +42,8 @@ const useStyles = createStyles((theme) => ({
 interface BadgeCardProps {
   image: string;
   title: string;
-  author: string;
-  id: number;
+  author: string[];
+  id: string;
 //   description: string;
 //   badges: {
 //     emoji: string;
@@ -84,7 +84,13 @@ export function BadgeCard({
           <Text fz="lg" fw={500}>
             {title}
           </Text>
-          <Badge size="sm">{author}</Badge>
+
+          {/* <Badge size="sm">{author}</Badge> */}
+          {
+            author.map((author) => (
+              <Badge size="sm">{author}</Badge>
+            ))
+          }
         </Group>
         {/* <Text fz="sm" mt="xs">
           {description}

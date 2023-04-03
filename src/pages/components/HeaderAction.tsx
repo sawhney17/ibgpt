@@ -142,7 +142,10 @@ function HeaderAction({ links }: HeaderActionProps) {
           <Text
             color="ocean-blue"
             size="x-large"
-            style={{ fontWeight: "bold" }}
+            style={{ fontWeight: "bold", cursor: "pointer" }}
+            onClick={() => {
+              window.location.href = "/";
+            }}
           >
             IBGPT
           </Text>
@@ -152,12 +155,21 @@ function HeaderAction({ links }: HeaderActionProps) {
         </Group>
 
         {loggedIn ? (
-          <img
-            //   @ts-ignore
-            src={auth.currentUser.photoURL}
-            alt="Profile"
-            style={{ height: "3rem", borderRadius: "100px" }}
-          />
+          // <img
+          //   //   @ts-ignore
+          //   src={auth.currentUser.photoURL}
+          //   alt="Profile"
+          //   style={{ height: "3rem", borderRadius: "100px" }}
+          // />
+          <Button
+            radius="xl"
+            h={30}
+            // onClick={() => {
+            //   signInWithGoogle();
+            // }}
+          >
+            Profile
+          </Button>
         ) : (
           <Button
             radius="xl"
