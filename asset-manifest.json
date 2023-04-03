@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ibgpt/static/css/main.c9b8cdb8.css",
+    "main.js": "/ibgpt/static/js/main.a70020f7.js",
+    "static/js/787.d668332c.chunk.js": "/ibgpt/static/js/787.d668332c.chunk.js",
+    "index.html": "/ibgpt/index.html",
+    "main.c9b8cdb8.css.map": "/ibgpt/static/css/main.c9b8cdb8.css.map",
+    "main.a70020f7.js.map": "/ibgpt/static/js/main.a70020f7.js.map",
+    "787.d668332c.chunk.js.map": "/ibgpt/static/js/787.d668332c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c9b8cdb8.css",
+    "static/js/main.a70020f7.js"
+  ]
+}
