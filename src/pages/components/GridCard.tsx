@@ -1,4 +1,4 @@
-import { IconHeart } from "@tabler/icons-react";
+import { IconHeart, IconLock, IconLockAccess } from "@tabler/icons-react";
 import {
   Card,
   Image,
@@ -12,6 +12,9 @@ import {
   Flex,
 } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -71,6 +74,17 @@ export function BadgeCard({
 //       {badge.label}
 //     </Badge>
 //   ));
+useEffect(() => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setLoggedin(true);
+    } else {
+      setLoggedin(false);
+    }
+  });
+}, []);
+
+const [loggedin, setLoggedin] = React.useState(false);
 
   return (
     <Card withBorder radius="md" p="md" className={classes.card}>
@@ -115,7 +129,8 @@ export function BadgeCard({
             navigate("/chatui?chatbot=" + id);
           }}
         >
-          Start Chat
+
+          {loggedin ? "Start Chat" : <><IconLock></IconLock>    Login to Chat</>}
         </Button>
         {/* <ActionIcon variant="default" radius="md" size={36}>
           <IconHeart size="1.1rem" className={classes.like} stroke={1.5} />
