@@ -1,11 +1,8 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { MantineProvider } from "@mantine/core";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import ChatbotSelector from "./pages/ChatbotSelector";
 import ChatUI from "./pages/ChatUI";
-import { Notifications } from "@mantine/notifications";
 
 function App() {
   return (
