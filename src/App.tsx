@@ -13,7 +13,7 @@ function App() {
       },
       primaryColor: 'ocean-blue',
     }}
-    >
+    > 
       {/* <Notifications> */}
         <BrowserRouter
         // Type '{ children: Element; }' is missing the following properties from type 'RouterProps': location, navigatorts(2739)
