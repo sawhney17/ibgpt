@@ -2,7 +2,7 @@
   "name": "ibgpt",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sawhney17.github.io/ibgpt",
+  "homepage": "https://ibgpt.me/",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@mantine/core": "^6.0.5",
