@@ -117,9 +117,9 @@ export function BadgeCard({
         >
           Start Chat
         </Button>
-        <ActionIcon variant="default" radius="md" size={36}>
+        {/* <ActionIcon variant="default" radius="md" size={36}>
           <IconHeart size="1.1rem" className={classes.like} stroke={1.5} />
-        </ActionIcon>
+        </ActionIcon> */}
       </Group>
     </Card>
   );
