@@ -104,6 +104,22 @@ export default function ChatbotSelector() {
             // ]}
           />
       </Grid.Col>
+      <Grid.Col span={12} xs={4} xl={
+          3
+        }>
+          <BadgeCard
+            image="https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/61lrZ7w-zsL._AC_UF1000,1000_QL80_.jpg"
+            title="A doll's house"
+            id="adollshouse"
+            author={["Henrik Ibsen"]}
+            // description="This new edition of Economics for the IB Diploma has been fully updated to match the latest syllabus for first examination in 2021. Written by an experienced IB Economics teacher, this textbook provides comprehensive and accessible coverage of the syllabus content. It includes a wide range of international case studies and examples, and is packed with engaging activities to help students apply their knowledge and develop the skills they need to succeed."
+            // badges={[
+            //   { emoji: "🏆", label: "Bestseller" },
+            //   { emoji: "📚", label: "Education" },
+            //   { emoji: "📖", label: "Reference" },
+            // ]}
+          />
+      </Grid.Col>
       </Grid>
     </div>
   );
